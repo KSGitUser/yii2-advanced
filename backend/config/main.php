@@ -15,15 +15,23 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'csrfCookie' => [
+                'httpOnly' => true,
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'identityCookie' => [
+                'name' => '_identity-backend',
+                'httpOnly' => true],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
+            'cookieParams' => [
+                'path' => '/../',
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

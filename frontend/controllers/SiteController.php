@@ -72,6 +72,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+       /*  var_dump($_SESSION); 
+        var_dump($this->user);
+        exit; */
         return $this->render('index');
     }
 
