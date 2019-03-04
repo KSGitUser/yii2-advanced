@@ -9,21 +9,23 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'eventController', 'bootstrap'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-        /* 'request' => [
-            'csrfParam' => '_csrf-frontend',
-        ], */
-        /* 'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+        'bootstrap' => [
+            'class' => 'frontend\components\Bootstrap',
         ],
-        'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
-        ], */
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => yii\i18n\PhpMessageSource::class,
+                    'basePath' => "@frontend/messages"
+                ]
+            ]
+        ],
+        'eventController' => [
+            'class' => 'frontend\components\EventController',
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '',
@@ -36,6 +38,13 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
