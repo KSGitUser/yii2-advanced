@@ -36,14 +36,15 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => [
-                'name' => '_identity-backend',
-                'httpOnly' => true],
+                'name' => '_identity',
+                'httpOnly' => true,
+                'domain' => 'yii2.advanced'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+            'name' => 'advanced',
             'cookieParams' => [
-                'path' => '/../',
+                
             ]
         ],
         'log' => [
