@@ -96,7 +96,7 @@ class TasksController extends Controller
      
 
         return $this->render('create', [
-            'model' => $model, 'array' => $newArray,
+            'model' => $model, 'array' => $newArray, 
         ]);
     }
 
@@ -140,6 +140,7 @@ class TasksController extends Controller
             'imageModel'=>$imageModel, 
             'taskCommentForm' => new Comments,
             'userId' => \Yii::$app->user->id,
+            'channel' => 'Task_' . $id
         ]);
     }
 
@@ -166,7 +167,7 @@ class TasksController extends Controller
         }
 
         return $this->render('update', [
-            'model' => $model, 'array' => $newArray,
+            'model' => $model, 'array' => $newArray, 'channel' => 'Task_' . $id
         ]);
     }
 

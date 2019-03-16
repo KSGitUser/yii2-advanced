@@ -4,6 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\tables\Users;
 use yii\helpers\Url;
+use frontend\assets\TaskOneAsset;
+
+TaskOneAsset::register($this);
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\tables\Tasks */
@@ -47,8 +51,28 @@ use yii\helpers\Url;
         <?foreach ($model->comments as $comment): ?>
             <p><strong><?= $comment->user->username?></strong>: <?= $comment->comment ?> </p>
         <?php endforeach;?>
-    </div>  
+    </div> 
+    <h3>Чат</h3>
+    <div class="task-chat">
+        <form action="#" name="chat_form" id="chat_form">
+         <label>
+            <input type="hidden" name="channel" value="<?=$channel?>" />
+            <input type="hidden" name="user_id" value="<?=$userId?>" /> 
+            Введите сообщение
+            <input type="text" name="message" />
+            <input type="submit" />
+        </label>
+        </form>
+        <hr>
+        <div class="chat"></div>
+    
+
+
+    </div> 
 </div>
+<script>
+    const channel = '<?=$channel?>'
+</script>
 
 
 
