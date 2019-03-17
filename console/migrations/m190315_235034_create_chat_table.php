@@ -19,6 +19,8 @@ class m190315_235034_create_chat_table extends Migration
             'user_id' => $this->integer(),
             'created_at' => 'datetime DEFAULT NOW()', 
         ]);
+
+        $this->addForeignKey('fk_chat_users_foreign', '{{%chat}}', 'user_id', 'users', 'id' );
     }
 
     /**
@@ -26,6 +28,7 @@ class m190315_235034_create_chat_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_users_foreign', '{{%chat}}');
         $this->dropTable('{{%chat}}');
     }
 }

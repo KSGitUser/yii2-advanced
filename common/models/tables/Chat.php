@@ -12,6 +12,8 @@ use Yii;
  * @property string $message
  * @property int $user_id
  * @property string $created_at
+ *
+ * @property Users $user
  */
 class Chat extends \yii\db\ActiveRecord
 {
@@ -32,6 +34,7 @@ class Chat extends \yii\db\ActiveRecord
             [['user_id'], 'integer'],
             [['created_at'], 'safe'],
             [['channel', 'message'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -47,5 +50,13 @@ class Chat extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'created_at' => 'Created At',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
     }
 }

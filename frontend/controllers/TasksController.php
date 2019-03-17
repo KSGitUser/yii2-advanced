@@ -5,6 +5,8 @@ namespace frontend\controllers;
 
 use common\models\tables\Tasks;
 use common\models\tables\Users;
+use common\models\tables\Chat;
+
 use Yii;
 
 use yii\data\ActiveDataProvider;
@@ -133,6 +135,12 @@ class TasksController extends Controller
           
       
           }
+        $channel = 'Task_' . $id;
+        $chatItems = Chat::find()->select('*')
+          ->with('user')
+          ->where(['channel' => $channel])
+          ->orderBy('created_at')
+          ->all();
       
         return $this->render('update', [
             'model' => $model, 
@@ -140,7 +148,8 @@ class TasksController extends Controller
             'imageModel'=>$imageModel, 
             'taskCommentForm' => new Comments,
             'userId' => \Yii::$app->user->id,
-            'channel' => 'Task_' . $id
+            'channel' => $channel,
+            'chatItems' => $chatItems,
         ]);
     }
 
@@ -199,5 +208,9 @@ class TasksController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionPrint($obj) {
+        var_dump($obj);exit;
     }
 }

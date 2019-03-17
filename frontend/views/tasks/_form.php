@@ -64,7 +64,16 @@ TaskOneAsset::register($this);
         </label>
         </form>
         <hr>
-        <div class="chat"></div>
+        <div class="chat">
+        <?php foreach ($chatItems as $item) : ?>
+            <div><?= $item['created_at']?> 
+            <strong><?= $item['user']['username'] ?? "anonymous" ?></strong>
+             <?= $item['message'] ?>
+            </div>
+
+        <?php endforeach;?> 
+        
+        </div>
     
 
 

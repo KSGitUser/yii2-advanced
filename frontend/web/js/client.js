@@ -19,11 +19,18 @@ document.getElementById('chat_form')
 
 
 webSocket.onmessage = function (event) {
-  const data = event.data;
+  const data = JSON.parse(event.data);
   const messageContainer = document.createElement('div');
-  const textNode = document.createTextNode(data);
+  let textNode = document.createTextNode(data.created_at);
+  messageContainer.appendChild(textNode);
+  const strongUsername = document.createElement('strong');
+  textNode = document.createTextNode(' ' + data.username);
+  strongUsername.appendChild(textNode);
+  messageContainer.appendChild(strongUsername);
+  textNode = document.createTextNode(' ' + data.message);
   messageContainer.appendChild(textNode);
   document.querySelector('.chat')
     .appendChild(messageContainer);
+  document.getElementsByName('message')[0].value = '';
 }
 
