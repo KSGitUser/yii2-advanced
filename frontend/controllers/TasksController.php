@@ -120,6 +120,7 @@ class TasksController extends Controller
 /* 
         var_dump($model->load(Yii::$app->request->post())); exit; */
 
+        /* $newChat = new \console\components\Chat(); */
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $user = Users::find()->select(['username'])->where(['id' => $model->responsible_id])->one()->username;

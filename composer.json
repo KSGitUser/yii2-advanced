@@ -21,7 +21,9 @@
         "dmstr/yii2-adminlte-asset": "2.*",
         "guzzlehttp/guzzle": "^6.3",
         "facebook/webdriver": "^1.6",
-        "cboden/ratchet": "^0.4.1"
+        "cboden/ratchet": "^0.4.1",
+        "sonko-dmitry/yii2-telegram-bot-api": "*",
+        "telegram-bot/api": "^2.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

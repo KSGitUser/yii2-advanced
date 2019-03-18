@@ -23,13 +23,14 @@ class Chat implements MessageComponentInterface
         $channel = explode("=", $queryString)[1];
 
         $this->clients[$channel][$conn->resourceId] = $conn;
-        echo "New connection: ({$conn->resourceId})\n";
+        echo "New connection: ({$conn->resourceId})\n"; 
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
 
         $data = json_decode($msg, true);
+        
 
         echo "{$from->resourceId} : {$data['message']}\n";
         try {
