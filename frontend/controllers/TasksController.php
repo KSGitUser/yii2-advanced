@@ -147,7 +147,7 @@ class TasksController extends Controller
             'model' => $model, 
             'array' => $newArray, 
             'imageModel'=>$imageModel, 
-            'taskCommentForm' => new Comments,
+            'taskCommentForm' => new Comments(),
             'userId' => \Yii::$app->user->id,
             'channel' => $channel,
             'chatItems' => $chatItems,
@@ -157,13 +157,25 @@ class TasksController extends Controller
     public function actionAddComment() 
     {
      
-        $model = new Comments();
-        if($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', "Комментарий добавлен");
+        $modelComments = new Comments();
+        if($modelComments->load(\Yii::$app->request->post()) && $modelComments->save()) {
+           
+           /* \Yii::$app->session->setFlash('success', "Комментарий добавлен"); */
         } else {
-            \Yii::$app->session->setFlash('error', "Не удалось добавить комментарий");
+            /* \Yii::$app->session->setFlash('error', "Не удалось добавить комментарий"); */
         }
-        $this->redirect(\Yii::$app->request->referrer);
+
+        $id = $modelComments->task_id;
+
+        /* Tasks::find()->select('*')->where(['id'=>$id])->with('comments')->one(), */ 
+
+        return $this->render('_comments', [
+            'model' => $this->findModel($id),
+            'taskCommentForm' => new Comments(),
+            'userId' => \Yii::$app->user->id,
+           
+        ]);
+       /*  return $this->redirect(\Yii::$app->request->referrer); */
     }
 
     public function actionCardUpdate($id)
