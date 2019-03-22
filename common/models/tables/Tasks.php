@@ -73,6 +73,13 @@ class Tasks extends \yii\db\ActiveRecord
         ];
      }
 
+     public function extraFields() {
+         unset($this->responsible['auth_key'], 
+                $this->responsible['password_hash'], 
+                $this->responsible['password_reset_token']);
+        return ['responsible'];
+      }
+
     /**
      * @return \yii\db\ActiveQuery
      */
